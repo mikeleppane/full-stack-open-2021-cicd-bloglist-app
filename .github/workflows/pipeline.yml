@@ -33,6 +33,7 @@ jobs:
           export MONGODB_URI=${{env.MONGODB_URI}}
           export PORT=${{env.PORT}}
           export SECRET=${{env.API_SECRET}}
+          export API_BASE_URL=http://localhost:3003
           npm run build
       #      - name: unittests
       #        run: |

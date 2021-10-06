@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
@@ -48,6 +49,9 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./frontend/public/index.html",
       filename: "./index.html",
+    }),
+    new webpack.EnvironmentPlugin({
+      API_BASE_URL: `${process.env.API_BASE_URL}`,
     }),
   ],
 };

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "API_BASE_URL=http://localhost:3003 webpack-dev-server --mode development",
     "start-dev": "NODE_ENV=development node index.js",
     "start-prod": "NODE_ENV=production node index.js",
     "test": "NODE_ENV=test jest --verbose --runInBand --testPathIgnorePatterns=frontend --testPathIgnorePatterns=cypress",

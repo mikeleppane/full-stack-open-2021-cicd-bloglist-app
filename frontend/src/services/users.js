@@ -1,7 +1,8 @@
 import axios from "axios";
-import { PROXY } from "../utils/config";
 
-const baseUrl = `${PROXY}/api/users`;
+const baseUrl = `${
+  process.env.API_BASE_URL || "http://localhost:3003"
+}/api/users`;
 
 const getAll = async () => {
   const response = await axios.get(baseUrl);
