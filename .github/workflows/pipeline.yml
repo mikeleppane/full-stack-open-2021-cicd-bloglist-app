@@ -31,7 +31,6 @@ jobs:
           npm run eslint
       - name: build
         run: |
-          export MONGODB_URI=${{env.MONGODB_URI}}
           export PORT=${{env.PORT}}
           export SECRET=${{env.API_SECRET}}
           export API_BASE_URL=${{env.API_BASE_URL}}
