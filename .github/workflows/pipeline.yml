@@ -31,19 +31,34 @@ jobs:
       - name: build
         run: |
           export MONGODB_URI=${{env.MONGODB_URI}}
-          npm run build
-      - name: unittests
-        run: |
-          export TEST_MONGODB_URI=${{env.TEST_MONGODB_URI}}
           export PORT=${{env.PORT}}
           export SECRET=${{env.API_SECRET}}
-          npm run start-test &
-          npm run test
-      - name: component tests
-        run: npm run test:client
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
+          npm run build
+      #      - name: unittests
+      #        run: |
+      #          export TEST_MONGODB_URI=${{env.TEST_MONGODB_URI}}
+      #          npm run start-test &
+      #          npm run test
+      #      - name: component tests
+      #        run: npm run test:client
+      #      - name: e2e tests
+      #        uses: cypress-io/github-action@v2
+      #        with:
+      #          command: npm run test:e2e
+      #          wait-on: http://localhost:3003
+      - name: Increase version and push tag
+        if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+      - name: Deploy to Heroku
+        #if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          command: npm run test:e2e
-          start: npm run start-test
-          wait-on: http://localhost:3003
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "full-stack-cicd-blog-list-app"
+          heroku_email: "mleppan23@gmail.com"
+          healthcheck: "https://full-stack-cicd-blog-list-app.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
