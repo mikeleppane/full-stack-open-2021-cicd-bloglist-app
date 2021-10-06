@@ -16,7 +16,7 @@ jobs:
       TEST_MONGODB_URI: ${{secrets.TEST_MONGODB_URI}}
       MONGODB_URI: ${{secrets.MONGODB_URI}}
       PORT: 3003
-      SECRET: ${{secrets.API_SECRET}}
+      API_SECRET: ${{secrets.API_SECRET}}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -29,8 +29,9 @@ jobs:
           npm run prettier
           npm run eslint
       - name: build
+        run: |
           export MONGODB_URI=${{env.MONGODB_URI}}
-        run: npm run build
+          npm run build
       - name: unittests
         run: |
           export TEST_MONGODB_URI=${{env.TEST_MONGODB_URI}}
