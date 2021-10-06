@@ -31,12 +31,13 @@ jobs:
           npm run eslint
       - name: build
         run: |
-          export PORT=${{env.PORT}}
-          export SECRET=${{env.API_SECRET}}
           export API_BASE_URL=${{env.API_BASE_URL}}
           npm run build
       - name: unittests
         run: |
+          export PORT=${{env.PORT}}
+          export SECRET=${{env.API_SECRET}}
+          export API_BASE_URL=${{env.API_BASE_URL}}
           export TEST_MONGODB_URI=${{env.TEST_MONGODB_URI}}
           npm run start-test &
           npm run test
