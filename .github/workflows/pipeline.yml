@@ -1,0 +1,40 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [ master ]
+    types: [ opened, synchronize ]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    env:
+      COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: npm install
+        run: npm install
+      - name: code quality
+        run: |
+          npm run prettier
+          npm run eslint
+      - name: build
+        run: npm run build
+      - name: unittests
+        run: |
+          npm run start-test
+          npm run test
+      - name: component tests
+        run: npm run test:client
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-test
+          wait-on: http://localhost:3003
