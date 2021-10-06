@@ -17,6 +17,7 @@ jobs:
       MONGODB_URI: ${{secrets.MONGODB_URI}}
       PORT: 3003
       API_SECRET: ${{secrets.API_SECRET}}
+      API_BASE_URL: http://localhost:3003
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -33,7 +34,7 @@ jobs:
           export MONGODB_URI=${{env.MONGODB_URI}}
           export PORT=${{env.PORT}}
           export SECRET=${{env.API_SECRET}}
-          export API_BASE_URL=http://localhost:3003
+          export API_BASE_URL=${{env.API_BASE_URL}}
           npm run build
       - name: unittests
         run: |
