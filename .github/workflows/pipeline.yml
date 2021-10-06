@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+      TEST_MONGODB_URI: ${{secrets.TEST_MONGODB_URI}}
+      MONGODB_URI: ${{secrets.MONGODB_URI}}
+      PORT: 3003
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -28,6 +31,8 @@ jobs:
         run: npm run build
       - name: unittests
         run: |
+          export TEST_MONGODB_URI=${{env.TEST_MONGODB_URI}}
+          export PORT:${{env.PORT}}
           npm run start-test &
           npm run test
       - name: component tests
