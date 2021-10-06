@@ -1,0 +1,71 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/errors",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react-redux/recommended",
+    "plugin:cypress/recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "import",
+    "react",
+    "jsx-a11y",
+    "jest",
+    "cypress",
+    "react-redux"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "jest": true,
+    "commonjs": true,
+    "es2021": true,
+    "jest/globals": true,
+    "cypress/globals": true
+  },
+  "rules": {
+    "react/prop-types": 0,
+    "jsx-a11y/label-has-for": 0,
+    "react/react-in-jsx-scope": "off",
+    "react-redux/connect-prefer-named-arguments": 2,
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "eqeqeq": "error",
+    "no-trailing-spaces": "error",
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "arrow-spacing": [
+      "error",
+      {
+        "before": true,
+        "after": true
+      }
+    ],
+    "no-console": 0
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  }
+}
