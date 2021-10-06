@@ -1,12 +1,4 @@
-### Full Stack open 2021 - HY
+# Full Stack open CI/CD -
 
-#### Blog list project for part 4
-
-#### How to use
-
-```javascript 
-1. npm run dev (with nodemon for local execution) or
-2. npm start
-``` 
-
-[Link to exercises](https://fullstackopen.com/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-1-4-2)
+This repository is used for the CI/CD module of the Full stack open 2021 course. The purpose of this repo is to develop
+a CI/CD pipeline for the blog list application developed earlier in the modules 4 and 5.
