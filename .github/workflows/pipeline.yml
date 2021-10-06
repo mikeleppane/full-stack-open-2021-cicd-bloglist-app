@@ -9,7 +9,7 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-  simple_deployment_pipeline:
+  blog-list-app-deployment-pipeline:
     runs-on: ubuntu-20.04
     env:
       COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
@@ -28,7 +28,7 @@ jobs:
         run: npm run build
       - name: unittests
         run: |
-          npm run start-test
+          npm run start-test &
           npm run test
       - name: component tests
         run: npm run test:client
